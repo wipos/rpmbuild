@@ -1,5 +1,5 @@
-# Using almalinux:latest as base image for this container
-FROM almalinux:latest
+# Using fedora:41 as base image for this container
+FROM fedora:41
 
 # Copying all contents of rpmbuild repo inside container
 COPY . .
