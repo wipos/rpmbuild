@@ -54,7 +54,8 @@ async function run() {
     process.env.GIT_DIR = '/github/workspace/.git';
     const sourceDir = '/github/workspace/sources';
     const destDir = '/github/home/rpmbuild/SOURCES';
-    await exec.exec(`cp ${sourceDir}/ ${destDir}/`);
+    await exec.exec(`mkdir -p ${sourceDir}`);
+    await exec.exec(`cp -r ${sourceDir}/ ${destDir}/`);
     await exec.exec(`git archive --output=/github/home/rpmbuild/SOURCES/${name}-${version}.tar.gz --prefix=${name}-${version}/ HEAD`);
     await exec.exec(`ln -s /github/home/rpmbuild/SOURCES/${name}-${version}.tar.gz /github/home/rpmbuild/SOURCES/${name}.tar.gz`);
     process.env.GIT_DIR = oldGitDir;
