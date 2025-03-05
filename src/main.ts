@@ -56,7 +56,7 @@ async function run() {
     await exec.exec(`ls -la ${sourceDir}`);
     const destDir = '/github/home/rpmbuild/SOURCES';
     await exec.exec(`mkdir -p ${destDir}`);
-    await exec.exec(`cp -r ${sourceDir}/ ${destDir}/`);
+    await exec.exec(`cp -r ${sourceDir}/* ${destDir}/`);
     await exec.exec(`ls -la ${destDir}`);
     // await exec.exec(`git archive --output=/github/home/rpmbuild/SOURCES/${name}-${version}.tar.gz --prefix=${name}-${version}/ HEAD`);
     // await exec.exec(`ln -s /github/home/rpmbuild/SOURCES/${name}-${version}.tar.gz /github/home/rpmbuild/SOURCES/${name}.tar.gz`);
