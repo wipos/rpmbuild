@@ -56,7 +56,11 @@ async function run() {
     await exec.exec(`ls -la ${sourceDir}`);
     const destDir = '/github/home/rpmbuild/SOURCES';
     await exec.exec(`mkdir -p ${destDir}`);
-    await exec.exec(`cp -r ${sourceDir}/* ${destDir}/`);
+    fs.readdirSync(sourceDir).forEach(file => {
+      const srcFile = path.join(sourceDir, file);
+      const destFile = path.join(destDir, file);
+      fs.copyFileSync(srcFile, destFile);
+    });
     await exec.exec(`ls -la ${destDir}`);
     // await exec.exec(`git archive --output=/github/home/rpmbuild/SOURCES/${name}-${version}.tar.gz --prefix=${name}-${version}/ HEAD`);
     // await exec.exec(`ln -s /github/home/rpmbuild/SOURCES/${name}-${version}.tar.gz /github/home/rpmbuild/SOURCES/${name}.tar.gz`);
